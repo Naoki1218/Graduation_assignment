@@ -1,0 +1,9 @@
+<h1>見積書作成ページ</h1>
+
+<%= search_form_for @search do |f| %>
+
+  <%= f.label :name_cont, "商品名を含む" %>
+  <%= f.search_field :name_cont %>
+
+  <div class="actions"><%= f.submit "検索" %></div>
+<% end %>

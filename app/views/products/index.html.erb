@@ -1,0 +1,28 @@
+<h1>products</h1>
+<table>
+<thead>
+  <tr>
+    <th>製品名</th>
+    <th>在庫数</th>
+    <th>原価</th>
+    <th>単価</th>
+  </tr>
+</thead>
+<tbody>
+  <% @products.each do |product| %>
+  <tr>
+    <td><%= check_box_tag "products[]"  %></td>
+    <td><%= product.name %></td>
+    <td><%= product.stock %></td>
+    <td><%= product.prime_cost %></td>
+    <td><%= product.unit_price %></td>
+  </tr>
+  <% end %>
+
+  <%= form_with(model: @blog, local: true ) do |form| %>
+  <%= form.label :個数 %>
+  <%= form.text_field :title %>
+  <%= form.submit %>
+  <% end %>
+</tbody>
+</table>

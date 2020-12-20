@@ -2,8 +2,8 @@
 
 one:
   estimate: one
-  user: one
+  product: one
 
 two:
   estimate: two
-  user: two
+  product: two

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_121638) do
+ActiveRecord::Schema.define(version: 2020_12_20_092113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customer_estimates", force: :cascade do |t|
+    t.bigint "estimate_id"
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_estimates_on_customer_id"
+    t.index ["estimate_id"], name: "index_customer_estimates_on_estimate_id"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -22,30 +31,41 @@ ActiveRecord::Schema.define(version: 2020_12_16_121638) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "estimate_products", force: :cascade do |t|
+    t.bigint "estimate_id"
+    t.bigint "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["estimate_id"], name: "index_estimate_products_on_estimate_id"
+    t.index ["product_id"], name: "index_estimate_products_on_product_id"
+  end
+
   create_table "estimates", force: :cascade do |t|
     t.integer "total_price"
     t.integer "discount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "deadline"
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.date "deadline"
-    t.integer "stock"
-    t.integer "prime_cost"
     t.integer "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "stock"
   end
 
   create_table "reasons", force: :cascade do |t|
-    t.text "content"
-    t.bigint "user_id"
     t.bigint "estimate_id"
+    t.bigint "user_id"
     t.boolean "approval"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["estimate_id"], name: "index_reasons_on_estimate_id"
+    t.index ["user_id"], name: "index_reasons_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,4 +82,10 @@ ActiveRecord::Schema.define(version: 2020_12_16_121638) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "customer_estimates", "customers"
+  add_foreign_key "customer_estimates", "estimates"
+  add_foreign_key "estimate_products", "estimates"
+  add_foreign_key "estimate_products", "products"
+  add_foreign_key "reasons", "estimates"
+  add_foreign_key "reasons", "users"
 end
