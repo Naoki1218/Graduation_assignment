@@ -1,1 +1,25 @@
-<h1>見積書</h1>
+<h1>見積書一覧</h1>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>見積書ID</th>
+      <th>顧客名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @estimates.each do |estimate| %>
+    <tr>
+      <td><%= estimate.id %></td>
+      <td><%= estimate.customer_name %></td>
+      <td><%= link_to '見積書詳細', estimate_path(estimate), class: "btn btn-outline-primary" %></td>
+      <td><%= link_to "見積書編集", edit_estimate_path(estimate), class: "btn btn-outline-warning", data: { confirm: '本当に編集していいですか？' } %></td>
+      <td><%= link_to '見積書削除', estimate_path(estimate), class: "btn btn-outline-danger", method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+      <td>
+
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

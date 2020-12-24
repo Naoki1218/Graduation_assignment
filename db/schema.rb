@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_20_092113) do
+ActiveRecord::Schema.define(version: 2020_12_24_074430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_12_20_092113) do
   create_table "estimate_products", force: :cascade do |t|
     t.bigint "estimate_id"
     t.bigint "product_id"
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["estimate_id"], name: "index_estimate_products_on_estimate_id"
@@ -47,14 +47,18 @@ ActiveRecord::Schema.define(version: 2020_12_20_092113) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "deadline"
+    t.bigint "user_id"
+    t.integer "customer_name", default: 0, null: false
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
+    t.integer "stock"
     t.integer "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "stock"
+    t.bigint "estimate_id"
+    t.boolean "availability"
   end
 
   create_table "reasons", force: :cascade do |t|

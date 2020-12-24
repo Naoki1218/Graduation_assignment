@@ -1,0 +1,36 @@
+<h1>見積書詳細画面</h1>
+
+<table>
+  <%= @estimate.customer_name %>
+</table>
+
+<table>
+  <tr>
+    <th>製品名</th>
+    <th>数量</th>
+    <th>単価</th>
+    <th>合計</th>
+  </tr>
+  </table>
+<table>
+<% @estimate.products.each do | pro | %>
+<tr>
+  <td><%= pro.name %></td>
+  <td>2</td>
+  <td><%= pro.unit_price %></td>
+  <td><%= pro.unit_price * 2 %></td>
+</tr>
+<% end %>
+</table>
+
+<table>
+<p>値引: <%= @estimate.discount %></p>
+<% if @estimate.discount == nil %>
+  <p>金額: <%= @estimate.products.sum(:unit_price) %></p>
+  <p>税込: <%= @estimate.products.sum(:unit_price)*1.1 %></p>
+<% else %>
+  <p>金額: <%= @estimate.products.sum(:unit_price)-@estimate.discount %></p>
+  <p>税込: <%= (@estimate.products.sum(:unit_price)-@estimate.discount)*1.1 %></p>
+<% end %>
+</table>
+<%= link_to '見積書一覧画面に戻る', estimates_path %>

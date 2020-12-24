@@ -1,0 +1,31 @@
+<%= form_with(model: @estimate, local: true ) do |form| %>
+<% if @estimate.errors.any? %>
+<div id="error_explanation">
+  <h2><%= @estimate.errors.count %>件のエラーがあります。</h2>
+  <ul>
+    <% @estimate.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div>
+<%= form.label :customer_name, "顧客" %>
+<%= form.select :customer_name, options_for_select(Estimate.customer_names.keys), include_blank: "選択して下さい" %>
+</div>
+
+<div>
+  <%= form.label :値引額 %>
+  <%= form.text_field :discount %>
+</div>
+
+
+<div>
+<%= form.collection_check_boxes(:product_ids, Product.all, :id, :name) %>
+</div>
+
+<%= form.submit %>
+<% end %>
+
+<%= link_to '見積書一覧画面に戻る', estimates_path %>
