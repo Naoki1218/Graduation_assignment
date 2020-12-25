@@ -1,5 +1,5 @@
-<h1>見積書一覧</h1>
-
+<h3>見積書一覧</h3>
+<h3>担当者:<%= current_user.name %></h3>
 
 <table class="table table-striped">
   <thead>
@@ -23,3 +23,4 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @estimates %>

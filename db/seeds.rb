@@ -56,3 +56,48 @@ Product.create!(
     }
   ]
 )
+
+Estimate.create!(
+  [
+    {
+      name: 'ゴールド',
+      unit_price: '2000',
+      stock: '10',
+    },
+    {
+      name: 'ドライポンプ',
+      unit_price: '3000',
+      stock: '50',
+    },
+    {
+      name: 'ターボ分子ポンプ',
+      unit_price: '4000',
+      stock: '30',
+    },
+    {
+      name: '油回転真空ポンプ',
+      unit_price: '5000',
+      stock: '40',
+    },
+    {
+      name: '電離真空系',
+      unit_price: '1500',
+      stock: '400',
+    },
+    {
+      name: 'ピラニ真空系',
+      unit_price: '1000',
+      stock: '450',
+    },
+    {
+      name: '蒸着装置',
+      unit_price: '300000',
+      stock: '3',
+    },
+    {
+      name: 'スパッタ装置',
+      unit_price: '500000',
+      stock: '4',
+    }
+  ]
+)

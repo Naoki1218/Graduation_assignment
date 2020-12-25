@@ -10,19 +10,33 @@
 </div>
 <% end %>
 
-<div>
+<div class="customer_name">
 <%= form.label :customer_name, "顧客" %>
 <%= form.select :customer_name, options_for_select(Estimate.customer_names.keys), include_blank: "選択して下さい" %>
 </div>
 
-<div>
+<div class="deadline">
+  <%= form.label :deadline, "納期" %>
+  <%= raw sprintf(
+  form.date_select(
+  :deadline,
+  use_month_numbers: true,
+  start_year:        2020,
+  end_year:          (Time.now.year + 20),
+  default:           Date.new(2020, 1, 1),
+  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+  '年 ', '月 ') + '日'
+  %>
+</div>
+
+<div class="discount">
   <%= form.label :値引額 %>
   <%= form.text_field :discount %>
 </div>
 
-
-<div>
-<%= form.collection_check_boxes(:product_ids, Product.all, :id, :name) %>
+<div class="field">
+  <%= form.label :name, "製品" %>
+  <%= form.collection_check_boxes(:product_ids, Product.all, :id, :name) %>
 </div>
 
 <%= form.submit %>

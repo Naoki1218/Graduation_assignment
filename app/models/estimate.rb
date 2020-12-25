@@ -1,5 +1,11 @@
 class Estimate < ApplicationRecord
+  validates :customer_name, presence: true
+  validates :product_ids, presence: true
+  validates :deadline, presence: true
+
   belongs_to :user
+  has_many :reasons
+  has_many :users
   # has_many :products
   has_many :customer_estimates, dependent: :destroy
   has_many :customers, through: :customer_estimates

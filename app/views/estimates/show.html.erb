@@ -1,7 +1,6 @@
-<h1>見積書詳細画面</h1>
 
 <table>
-  <%= @estimate.customer_name %>
+  <h3><%= @estimate.customer_name %> 御中</h3>
 </table>
 
 <table>
@@ -24,7 +23,8 @@
 </table>
 
 <table>
-<p>値引: <%= @estimate.discount %></p>
+<p>納期: <%= @estimate.deadline %></p>
+<p class="text-danger">値引: <%= @estimate.discount %></p>
 <% if @estimate.discount == nil %>
   <p>金額: <%= @estimate.products.sum(:unit_price) %></p>
   <p>税込: <%= @estimate.products.sum(:unit_price)*1.1 %></p>
@@ -33,4 +33,17 @@
   <p>税込: <%= (@estimate.products.sum(:unit_price)-@estimate.discount)*1.1 %></p>
 <% end %>
 </table>
+
+
+  <p>値引き理由</p>
+  <!-- このreasons_areaというHTMLのidを取得して、そのdivの部分だけを更新する -->
+  <div id="reasons_area">
+    <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+    <%= render partial: 'reasons/index', locals: { reasons: @reasons, estimate: @estimate } %>
+  </div>
+  <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+  <%= render partial: 'reasons/form', locals: { reason: @reason, estimate: @estimate } %>
+  <%= link_to '見積書編集', edit_estimate_path(@estimate), class: "btn btn-outline-warning" %>
+
+
 <%= link_to '見積書一覧画面に戻る', estimates_path %>

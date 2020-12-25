@@ -1,0 +1,31 @@
+<!-- この記述がestimateのshow画面に表示されるコメント入力欄になります -->
+<%= form_with(model: [estimate, reason]) do |form| %>
+  <% if reason.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reason.errors.count, "error") %> prohibited this reason from being saved:</h2>
+      <ul>
+      <% reason.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :コメント %>
+    <%= form.text_area :content %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <% if reason.approval == true %>
+  <%= form.check_box :approval %>
+  <% end %>
+
+  <% if @reason.approval == nil %>
+    <p>承認: <%= @estimate.products.sum(:unit_price) %></p>
+  <% else %>
+    <p>金額: <%= @estimate.products.sum(:unit_price)-@estimate.discount %></p>
+    <p>税込: <%= (@estimate.products.sum(:unit_price)-@estimate.discount)*1.1 %></p>
+  <% end %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

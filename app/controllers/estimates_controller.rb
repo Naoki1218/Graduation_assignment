@@ -4,7 +4,7 @@ class EstimatesController < ApplicationController
   before_action :set_estimate, only: [:show, :destroy]
 
   def index
-    @estimates = current_user.estimates
+    @estimates = current_user.estimates.page(params[:page]).per(5)
     # @products = Product.all
   end
 
@@ -20,7 +20,7 @@ class EstimatesController < ApplicationController
   def create
     @estimate = current_user.estimates.build(estimate_params)
 
-    if @estimate.save
+    if @estimate.save!
       # 一覧画面へ遷移して"見積書を作成しました！"とメッセージを表示します。
       redirect_to estimates_path, notice: "見積書を作成しました！"
     else
@@ -35,6 +35,8 @@ class EstimatesController < ApplicationController
     # @products = @estimate.products
     # @products = Product.all
     @estimate = current_user.estimates.find(params[:id])
+    @reasons = @estimate.reasons
+    @reason = @estimate.reasons.build
   end
 
   def edit
@@ -82,7 +84,7 @@ class EstimatesController < ApplicationController
   private
 
   def estimate_params
-    params.require(:estimate).permit(:total_price, :discount, :customer_name,{ product_ids: [] })
+    params.require(:estimate).permit(:total_price, :discount, :customer_name, :deadline,{ product_ids: [] })
   end
 
   def set_estimate
