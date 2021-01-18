@@ -15,16 +15,6 @@
     <%= form.text_area :content %>
     <%= form.hidden_field :user_id, :value => current_user.id %>
   </div>
-  <% if reason.approval == true %>
-  <%= form.check_box :approval %>
-  <% end %>
-
-  <% if @reason.approval == nil %>
-    <p>承認: <%= @estimate.products.sum(:unit_price) %></p>
-  <% else %>
-    <p>金額: <%= @estimate.products.sum(:unit_price)-@estimate.discount %></p>
-    <p>税込: <%= (@estimate.products.sum(:unit_price)-@estimate.discount)*1.1 %></p>
-  <% end %>
   <div class="actions">
     <%= form.submit %>
   </div>

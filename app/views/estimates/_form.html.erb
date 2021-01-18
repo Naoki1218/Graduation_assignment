@@ -10,6 +10,7 @@
 </div>
 <% end %>
 
+<center>
 <div class="customer_name">
 <%= form.label :customer_name, "顧客" %>
 <%= form.select :customer_name, options_for_select(Estimate.customer_names.keys), include_blank: "選択して下さい" %>
@@ -34,12 +35,59 @@
   <%= form.text_field :discount %>
 </div>
 
-<div class="field">
+<div class="field_with_errors">
   <%= form.label :name, "製品" %>
   <%= form.collection_check_boxes(:product_ids, Product.all, :id, :name) %>
 </div>
 
+<script type="text/javascript">
+
+$(function() {
+
+  $('button#add').click(function(){
+
+  var tr_form = '' +
+  '<tr>' +
+    '<td><input type="text" name="text_1[]"></td>' +
+    '<td><input type="text" name="text_2[]"></td>' +
+  '</tr>';
+
+  $(tr_form).appendTo($('table > tbody'));
+
+});
+
+
+});
+</script>
+
+<form action="data.php" method="post" enctype="multipart/form-data">
+<table>
+  <thead>
+    <tr>
+      <th>製品</th>
+      <th>数量</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" name="text_1[]"></td>
+      <td><input type="text" name="text_2[]"></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td ><button id="add" type="button">追加</button></td>
+    </tr>
+  </tfoot>
+</table>
+</form>
+
+<div>
 <%= form.submit %>
 <% end %>
+</div>
 
+<div>
 <%= link_to '見積書一覧画面に戻る', estimates_path %>
+</div>
+</center>

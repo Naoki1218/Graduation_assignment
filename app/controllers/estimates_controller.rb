@@ -20,7 +20,7 @@ class EstimatesController < ApplicationController
   def create
     @estimate = current_user.estimates.build(estimate_params)
 
-    if @estimate.save!
+    if @estimate.save
       # 一覧画面へ遷移して"見積書を作成しました！"とメッセージを表示します。
       redirect_to estimates_path, notice: "見積書を作成しました！"
     else

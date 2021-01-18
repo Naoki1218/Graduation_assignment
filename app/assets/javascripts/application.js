@@ -16,5 +16,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require jquery-ui
 //= require jquery/dist/jquery.js
 //= require_tree .
