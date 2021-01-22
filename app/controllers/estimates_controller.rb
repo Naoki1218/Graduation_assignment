@@ -1,7 +1,7 @@
 class EstimatesController < ApplicationController
   before_action :setup_estimate_product!, only: [:add_product, :update_product, :delete_product]
   before_action :authenticate_user!, only: [:index, :new, :edit, :update, :destroy]
-  before_action :set_estimate, only: [:show, :destroy]
+  before_action :set_estimate, only: [:destroy]
 
   def index
     @estimates = current_user.estimates.page(params[:page]).per(5)
@@ -11,6 +11,9 @@ class EstimatesController < ApplicationController
   def new
     @estimate = Estimate.new
     @products = Product.all
+    # @product = @estimate.products.build
+    # @estimate_product = @product.estimate_products.build
+    @estimate.estimate_products.build
     # #検索オブジェクト
     # @search = Product.ransack(params[:q])
     # # 検索結果
@@ -31,10 +34,9 @@ class EstimatesController < ApplicationController
   end
 
   def show
-    # @estimate = Estimate.find(params[:id])
-    # @products = @estimate.products
-    # @products = Product.all
     @estimate = current_user.estimates.find(params[:id])
+    @products = @estimate.products
+    # @products = Product.all
     @reasons = @estimate.reasons
     @reason = @estimate.reasons.build
   end
@@ -84,7 +86,10 @@ class EstimatesController < ApplicationController
   private
 
   def estimate_params
-    params.require(:estimate).permit(:total_price, :discount, :customer_name, :deadline,{ product_ids: [] })
+    params.require(:estimate).permit(:total_price, :discount, :customer_name, :quantity,
+                                     :deadline,{ product_ids: [] }, :product_name, :quantity,
+                                     [estimate_products_attributes:[:estimate_id, :product_id, :quantity, :_destroy]]
+                                     ).merge(user_id: current_user.id)
   end
 
   def set_estimate

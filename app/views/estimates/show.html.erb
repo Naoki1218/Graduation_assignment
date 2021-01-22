@@ -6,19 +6,25 @@
 <table>
   <tr>
     <th>製品名</th>
-    <th>数量</th>
     <th>単価</th>
-    <th>合計</th>
+    <th>数量</th>
   </tr>
   </table>
 <table>
+
+<% sum = 0 %>
 <% @estimate.products.each do | pro | %>
 <tr>
   <td><%= pro.name %></td>
-  <td>2</td>
-  <td><%= pro.unit_price %></td>
-  <td><%= pro.unit_price * 2 %></td>
+  <td><%= p = pro.unit_price %></td>
+  <td>
+    <%= q = @estimate.estimate_products.find_by(product_id: pro.id).quantity %>
+  </td>
+  <td>
+    <%= p * q %>
+  </td>
 </tr>
+<% sum += p * q %>
 <% end %>
 </table>
 
@@ -26,11 +32,11 @@
 <p>納期: <%= @estimate.deadline %></p>
 <p class="text-danger">値引: <%= @estimate.discount %></p>
 <% if @estimate.discount == nil %>
-  <p>金額: <%= @estimate.products.sum(:unit_price) %></p>
-  <p>税込: <%= @estimate.products.sum(:unit_price)*1.1 %></p>
+  <p>金額: <%= sum %></p>
+  <p>税込: <%= sum * 1.1 %></p>
 <% else %>
-  <p>金額: <%= @estimate.products.sum(:unit_price)-@estimate.discount %></p>
-  <p>税込: <%= (@estimate.products.sum(:unit_price)-@estimate.discount)*1.1 %></p>
+  <p>金額: <%= sum-@estimate.discount %></p>
+  <p>税込: <%= (sum-@estimate.discount)*1.1 %></p>
 <% end %>
 </table>
 

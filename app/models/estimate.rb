@@ -11,7 +11,8 @@ class Estimate < ApplicationRecord
   has_many :customers, through: :customer_estimates
   has_many :estimate_products, dependent: :destroy
   has_many :products, through: :estimate_products
-  # accepts_nested_attributes_for :products
+  # has_many :products, inverse_of: :estimate
+  accepts_nested_attributes_for :estimate_products, allow_destroy: true
 
   # def total
   # 	estimate_products.to_a.sum { |pro| pro.total }
