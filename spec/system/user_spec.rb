@@ -15,6 +15,29 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
     click_button 'ログイン'
   end
 
+  describe 'セッション機能のテスト' do
+    before do
+      @user = FactoryBot.create(:user)
+      @admin_user = FactoryBot.create(:admin_user)
+    end
+
+    context 'ログインしていない状態でユーザーのデータが登録されている場合' do
+      it 'ログインができること' do
+        user_login
+        expect(page).to have_content '担当者:test1'
+      end
+    end
+
+    context '一般ユーザーでログインしている状態' do
+      it '管理者画面へのリンクは表示されない' do
+        user_login
+        sleep 1
+        # expect(page).to has_link?('管理者画面')
+        expect(page).to have_no_content('管理者画面')
+      end
+    end
+  end
+
   describe '管理画面機能' do
     before do
       @user = FactoryBot.create(:user)
@@ -52,7 +75,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         page.all(".icon-info-sign")[1].click
         expect(page).to have_content "ユーザー 'test1'の詳細"
       end
-  #
+      #
       it '管理者はユーザーの編集画面からユーザー情報を編集できる' do
         sleep 1
         visit rails_admin_path
@@ -80,20 +103,25 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         expect(page).to have_content 'ユーザーの削除に成功しました'
       end
 
-        it '管理者は製品を新規登録できる' do
-          sleep 1
-          visit rails_admin_path
-          page.all(".pjax")[6].click
-          click_link '新規作成'
-          
-          fill_in 'Name', with: 'シリコン'
-          fill_in 'Stock', with: '100'
-          fill_in 'Unit price', with: '500'
-          click_on '保存'
+      it '管理者は製品を新規登録できる' do
+        sleep 1
+        visit rails_admin_path
+        page.all(".pjax")[6].click
+        click_link '新規作成'
 
-          expect(page).to have_content 'Productの作成に成功しました'
-          expect(page).to have_content 'シリコン'
-        end
+        fill_in 'Name', with: 'シリコン'
+        fill_in 'Stock', with: '100'
+        fill_in 'Unit price', with: '500'
+        click_on '保存'
+
+        expect(page).to have_content 'Productの作成に成功しました'
+        expect(page).to have_content 'シリコン'
+      end
+      it 'ログアウトできること' do
+        click_on 'ログアウト'
+
+        expect(current_path).to eq new_user_session_path
       end
     end
   end
+end
