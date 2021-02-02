@@ -118,6 +118,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         expect(page).to have_content 'シリコン'
       end
       it 'ログアウトできること' do
+        sleep 1
         click_on 'ログアウト'
 
         expect(current_path).to eq new_user_session_path
