@@ -5,12 +5,13 @@ class EstimatesController < ApplicationController
 
   def index
     @estimates = current_user.estimates.page(params[:page]).per(5)
-    # @products = Product.all
+    @customers
   end
 
   def new
     @estimate = Estimate.new
     @products = Product.all
+    # 2/2追加
     # @product = @estimate.products.build
     # @estimate_product = @product.estimate_products.build
     @estimate.estimate_products.build
@@ -59,34 +60,11 @@ class EstimatesController < ApplicationController
     redirect_to estimates_path, notice:"見積書を削除しました！"
   end
 
-  # def add_product
-  #   if @estimate_product.blank?
-  #     @estimate_product = current_estimate.estimate_products.build(product_id: params[:product_id])
-  #   end
-  #
-  #   @estimate_product.quantity += params[:quantity].to_i
-  #   @estimate_product.save
-  #   redirect_to current_estimate
-  # end
-  #
-  #
-  # # カート詳細画面から、「更新」を押した時のアクション
-  # def update_product
-  #   @estimate_product.update(quantity: params[:quantity].to_i)
-  #   redirect_to current_estimate
-  # end
-  #
-  # # カート詳細画面から、「削除」を押した時のアクション
-  # def delete_product
-  #   @estimate_product.destroy
-  #   redirect_to current_estimate
-  # end
-
 
   private
 
   def estimate_params
-    params.require(:estimate).permit(:total_price, :discount, :customer_name, :quantity,
+    params.require(:estimate).permit(:total_price, :discount, :customer_name, :quantity, :customer_id,
                                      :deadline,{ product_ids: [] }, :product_name, :quantity,
                                      [estimate_products_attributes:[:estimate_id, :product_id, :quantity, :_destroy]]
                                      ).merge(user_id: current_user.id)
@@ -95,19 +73,4 @@ class EstimatesController < ApplicationController
   def set_estimate
     @estimate = Estimate.find(params[:id])
   end
-
-  # def params_estimate_products
-  #   params.require(:estimate).permit(
-  #     :total_price, :discount, :deadline, :user_id, products_attributes:[
-  #       :name, :stock, :unit_price, :id
-  #     ]
-  #   )
-  # end
-
-  # def setup_estimate_product!
-  #   @estimate_product = current_estimate.estimate_products.find_by(product_id: params[:product_id])
-  # end
-
-
-
 end

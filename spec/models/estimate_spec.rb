@@ -32,7 +32,6 @@ RSpec.describe Estimate, type: :model do
         it 'バリデーションにひっかかる' do
           # ここに内容を記載する
           estimate = Estimate.new(customer_name: '株式会社AAA', deadline: '2022-01-11', product_name: '')
-          binding.irb
           expect(estimate).not_to be_valid
         end
       end

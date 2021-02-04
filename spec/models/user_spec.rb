@@ -42,5 +42,19 @@ RSpec.describe User, type: :model do
           expect(user).to be_valid
         end
       end
+      context 'ログインの際、名前が空の場合' do
+        it 'バリデーションにひっかかる' do
+          # ここに内容を記載する
+          user = User.new(name: '', password: '11111111')
+          expect(user).not_to be_valid
+        end
+      end
+      context 'ログインの際、パスワードが空の場合' do
+        it 'バリデーションにひっかかる' do
+          # ここに内容を記載する
+          user = User.new(name: 'test1', password: '')
+          expect(user).not_to be_valid
+        end
+      end
     end
 end

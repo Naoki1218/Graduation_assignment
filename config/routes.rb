@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :reasons
   end
   resources :products
+  resources :customers
 
 
   get 'product/search' => 'products#search'

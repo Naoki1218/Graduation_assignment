@@ -12,9 +12,11 @@
 
 <center>
 <div class="customer_name">
-<%= f.label :customer_name, "顧客" %>
-<%= f.select :customer_name, options_for_select(Estimate.customer_names.keys), include_blank: "選択して下さい" %>
+<%= f.label :customer_id, "顧客" %>
+<%= f.collection_select :customer_id, Customer.all, :id, :name, include_blank: "選択して下さい" %>
 </div>
+
+
 
 <div class="deadline">
   <%= f.label :deadline, "納期" %>

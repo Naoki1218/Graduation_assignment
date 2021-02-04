@@ -12,15 +12,13 @@
     <% @estimates.each do |estimate| %>
     <tr>
       <td><%= estimate.id %></td>
-      <td><%= estimate.customer_name %></td>
+      <td><%= estimate.customer.name %></td>
       <td><%= link_to '見積書詳細', estimate_path(estimate), class: "btn btn-outline-primary" %></td>
       <td><%= link_to "見積書編集", edit_estimate_path(estimate), class: "btn btn-outline-warning", data: { confirm: '本当に編集していいですか？' } %></td>
       <td><%= link_to '見積書削除', estimate_path(estimate), class: "btn btn-outline-danger", method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
-      <td>
-
-      </td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
 <%= paginate @estimates %>
