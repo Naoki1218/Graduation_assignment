@@ -64,7 +64,7 @@ class EstimatesController < ApplicationController
   private
 
   def estimate_params
-    params.require(:estimate).permit(:total_price, :discount, :customer_name, :quantity, :customer_id,
+    params.require(:estimate).permit(:total_price, :discount, :quantity, :customer_id,
                                      :deadline,{ product_ids: [] }, :product_name, :quantity,
                                      [estimate_products_attributes:[:estimate_id, :product_id, :quantity, :_destroy]]
                                      ).merge(user_id: current_user.id)

@@ -9,18 +9,26 @@ RSpec.describe '見積書作成機能', type: :system do
   end
 
   before do
+    @customer = FactoryBot.create(:customer)
+    @customer2 = FactoryBot.create(:customer2)
+    @customer3 = FactoryBot.create(:customer3)
+
     @product = FactoryBot.create(:product)
     @product2 = FactoryBot.create(:product2)
     @product3 = FactoryBot.create(:product3)
+
     @user = FactoryBot.create(:user)
+
     @estimate = FactoryBot.create(:estimate, user: @user)
     @estimate2 = FactoryBot.create(:another_estimate, user: @user)
     @estimate.products << @product
     @estimate2.products << @product2
+
     visit new_user_session_path
     fill_in '名前',with: 'test1'
     fill_in 'パスワード',with: '11111111'
     click_button 'ログイン'
+
   end
 
   describe '一覧表示機能' do
@@ -60,7 +68,7 @@ RSpec.describe '見積書作成機能', type: :system do
       it '金額が値引きされた見積書が作成される' do
         visit new_estimate_path
 
-        select '株式会社DDD',from: '顧客'
+        select '株式会社CCC',from: '顧客'
         select '2023',from: 'estimate_deadline_1i'
         select '2',from: 'estimate_deadline_2i'
         select '22',from: 'estimate_deadline_3i'
@@ -68,7 +76,7 @@ RSpec.describe '見積書作成機能', type: :system do
         select 'ドライポンプ',from: '製品名'
         fill_in 'estimate_estimate_products_attributes_0_quantity', with: '1'
         click_button '登録する'
-        expect(page).to have_content '株式会社DDD'
+        expect(page).to have_content '株式会社CCC'
       end
     end
   end
@@ -92,13 +100,13 @@ RSpec.describe '見積書作成機能', type: :system do
        it '該当見積書の内容を編集できる' do
           click_link '見積書編集', match: :first
           page.driver.browser.switch_to.alert.accept
-          select '株式会社LLL',from: '顧客'
+          select '株式会社CCC',from: '顧客'
           select '2022',from: 'estimate_deadline_1i'
           select '2',from: 'estimate_deadline_2i'
           select '22',from: 'estimate_deadline_3i'
           fill_in 'estimate_estimate_products_attributes_0_quantity', with: '2'
           click_button '更新する'
-          expect(page).to have_content '株式会社LLL'
+          expect(page).to have_content '株式会社CCC'
        end
      end
   end
