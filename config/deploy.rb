@@ -2,7 +2,7 @@
 lock '3.6.0'
 
 set :application, 'Grafoure'
-set :repo_url, 'https://github.com/Naoki1218/Graduation_assignment.git'
+set :repo_url, 'https://github.com/Naoki1218/Graduation_assignment'
 
 set :branch, ENV['BRANCH'] || 'master'
 # deploy先のディレクトリ。
