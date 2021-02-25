@@ -33,10 +33,10 @@
 <p class="text-danger">値引: <%= @estimate.discount %></p>
 <% if @estimate.discount == nil %>
   <p>金額: <%= sum %></p>
-  <p>税込: <%= sum * 1.1 %></p>
+  <p>税込: <%= ((sum * 1.1).round(2)).ceil %></p>
 <% else %>
   <p>金額: <%= sum-@estimate.discount %></p>
-  <p>税込: <%= (sum-@estimate.discount)*1.1 %></p>
+  <p>税込: <%= ((sum-@estimate.discount) * 1.1).round(2).ceil %></p>
 <% end %>
 </table>
 

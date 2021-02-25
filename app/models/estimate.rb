@@ -1,7 +1,7 @@
 class Estimate < ApplicationRecord
   # validates :product_ids, presence: true
   validates :deadline, presence: true
-
+  
   belongs_to :user
   has_many :reasons
   belongs_to :customer
