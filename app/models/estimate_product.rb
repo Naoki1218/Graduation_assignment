@@ -2,6 +2,7 @@ class EstimateProduct < ApplicationRecord
   belongs_to :estimate
   belongs_to :product
 
+
 def change
   create_table :estimate_products do |t|
 　  t.references :estimate, foreign_key: true, null: false
