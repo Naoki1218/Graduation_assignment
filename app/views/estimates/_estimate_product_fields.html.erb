@@ -1,6 +1,6 @@
 <div class='nested-fields'>
     <div class="field">
-      <%= f.label :product_id, '製品名' %>
+      <%= f.label :product, "製品名" %>
       <%= f.collection_select :product_id, Product.all, :id, :name, include_blank: "選択して下さい" %>
       <%= f.label :quantity, '×' %>
       <%= f.number_field :quantity %>

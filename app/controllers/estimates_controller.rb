@@ -1,7 +1,7 @@
 class EstimatesController < ApplicationController
   before_action :setup_estimate_product!, only: [:add_product, :update_product, :delete_product]
   before_action :authenticate_user!, only: [:index, :new, :edit, :update, :destroy]
-  before_action :set_estimate, only: [:show, :edit, :update, :destroy]
+  before_action :set_estimate, only: [:edit, :update, :destroy]
 
   def index
     @estimates = current_user.estimates.page(params[:page]).per(5)

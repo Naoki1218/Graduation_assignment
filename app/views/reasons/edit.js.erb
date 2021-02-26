@@ -1,1 +1,2 @@
 $("#this_reason_<%= @reason.id %>").replaceWith("<%= j render 'reasons/edit', estimate: @estimate, reason: @reason %>");
+$("#notice").html("<%= j flash[:notice] %>");

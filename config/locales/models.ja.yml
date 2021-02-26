@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      estimate: 見積書
+      user: ユーザー
+      customer: 顧客
+      estimate_product: 出荷予定製品
+      reason: 理由
+      product: 取扱製品
+    attributes:
+      estimate:
+        customer: 顧客
+        product: 製品名
+      customer:
+        name: 顧客
+      estimate_products:
+      reason:
+        content: 理由

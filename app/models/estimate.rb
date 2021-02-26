@@ -3,7 +3,7 @@ class Estimate < ApplicationRecord
   validates :deadline, presence: true
 
   belongs_to :user
-  has_many :reasons
+  has_many :reasons, dependent: :destroy
   belongs_to :customer
   # has_many :users
   # has_many :products
@@ -14,10 +14,12 @@ class Estimate < ApplicationRecord
   # has_many :products, inverse_of: :estimate
   accepts_nested_attributes_for :estimate_products, allow_destroy: true
 
-  # def total
-  # 	estimate_products.to_a.sum { |pro| pro.total }
-  # end
+  validate :date_before_start
 
+  def date_before_start
+    errors.add(:納期, "は今日以降を選択してください") if
+    deadline < Date.today
+  end
 
 
 end

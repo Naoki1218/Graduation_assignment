@@ -1,13 +1,13 @@
 class ReasonsController < ApplicationController
   before_action :set_estimate, only: [:create, :edit, :update]
   def create
-   # @estimate = Estimate.find(params[:estimate_id])
+   @estimate = Estimate.find(params[:estimate_id])
    @reason = @estimate.reasons.build(reason_params)
    respond_to do |format|
-     if @reason.save!
+     if @reason.save
        format.js { render :index }
      else
-       format.html { redirect_to estimate_path(@estimate), notice: '投稿できませんでした...' }
+       format.html { redirect_to estimate_path(@estimate), notice: '理由を記入してください！' }
      end
    end
  end
@@ -15,7 +15,7 @@ class ReasonsController < ApplicationController
   def edit
     @reason = @estimate.reasons.find(params[:id])
     respond_to do |format|
-      flash.now[:notice] = 'コメントの編集中'
+      flash.now[:notice] = '理由の編集中'
       format.js { render :edit }
     end
   end
@@ -24,10 +24,10 @@ class ReasonsController < ApplicationController
     @reason = @estimate.reasons.find(params[:id])
       respond_to do |format|
         if @reason.update(reason_params)
-          flash.now[:notice] = 'コメントが編集されました'
+          flash.now[:notice] = '理由が編集されました'
           format.js { render :index }
         else
-          flash.now[:notice] = 'コメントの編集に失敗しました'
+          flash.now[:notice] = '理由の編集に失敗しました'
           format.js { render :edit_error }
         end
       end

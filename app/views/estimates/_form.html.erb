@@ -1,55 +1,55 @@
 <%= form_with(model: @estimate, local: true ) do |f| %>
-<% if @estimate.errors.any? %>
-<div id="error_explanation">
-  <h2><%= @estimate.errors.count %>件のエラーがあります。</h2>
-  <ul>
-    <% @estimate.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+  <% if @estimate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @estimate.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @estimate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 <center>
-<div class="customer_name">
-<%= f.label :customer_id, "顧客" %>
-<%= f.collection_select :customer_id, Customer.all, :id, :name, include_blank: "選択して下さい" %>
-</div>
+  <div class="customer_name">
+    <%= f.label :customer %>
+    <%= f.collection_select :customer_id, Customer.all, :id, :name, include_blank: "選択して下さい" %>
+  </div>
 
 
 
-<div class="deadline">
-  <%= f.label :deadline, "納期" %>
-  <%= raw sprintf(
-  f.date_select(
-  :deadline,
-  use_month_numbers: true,
-  start_year:        2020,
-  end_year:          (Time.now.year + 20),
-  default:           Date.new(2020, 1, 1),
-  date_separator:    '%s'), # 年月日区切りをそれぞれ指定
-  '年 ', '月 ') + '日'
-  %>
-</div>
+  <div class="deadline">
+    <%= f.label :deadline, "納期" %>
+    <%= raw sprintf(
+    f.date_select(
+    :deadline,
+    use_month_numbers: true,
+    start_year:        2020,
+    end_year:          (Time.now.year + 20),
+    default:           Date.new(2020, 1, 1),
+    date_separator:    '%s'), # 年月日区切りをそれぞれ指定
+    '年 ', '月 ') + '日'
+    %>
+  </div>
 
-<div class="discount">
-  <%= f.label :discount, "値引額" %>
-  <%= f.text_field :discount %>
-</div>
+  <div class="discount">
+    <%= f.label :discount, "値引額" %>
+    <%= f.text_field :discount %>
+  </div>
 
 <%= f.fields_for :estimate_products do |ep| %>
    <%= render 'estimate_product_fields', f: ep %>
-   <div class='links'>
-    <%= link_to_add_association '＋別の製品を追加', f, :estimate_products %>
-   </div>
-   <% end %>
-
-<div>
-<%= f.submit %>
+    <div class='links'>
+      <%= link_to_add_association '＋別の製品を追加', f, :estimate_products %>
+    </div>
 <% end %>
-</div>
 
-<div>
-<%= link_to '見積書一覧画面に戻る', estimates_path %>
-</div>
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
+
+  <div>
+    <%= link_to '見積書一覧画面に戻る', estimates_path %>
+  </div>
 </center>

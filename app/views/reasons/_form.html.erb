@@ -11,7 +11,6 @@
     </div>
   <% end %>
   <div class="field">
-    <%= form.label :コメント %>
     <%= form.text_area :content %>
     <%= form.hidden_field :user_id, :value => current_user.id %>
   </div>
