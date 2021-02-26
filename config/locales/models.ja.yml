@@ -9,10 +9,24 @@ ja:
       product: 取扱製品
     attributes:
       estimate:
+        total_price: 合計金額
+        discount: 値引き
+        deadline: 納期
         customer: 顧客
         product: 製品名
+      product:
+        name: 製品名
+        stock: 在庫数
+        unit_price: 単価
       customer:
         name: 顧客
-      estimate_products:
+        user_id: 担当者
+        estimates: 作成中見積書
+      estimate_product:
+        estimate: 見積書
+        product: 製品名
+        quantity: 数量
       reason:
+        estimate: 見積書
+        user: 担当者
         content: 理由
