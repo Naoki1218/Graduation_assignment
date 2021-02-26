@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_122121) do
+ActiveRecord::Schema.define(version: 2021_02_26_141106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "customer_estimates", force: :cascade do |t|
-    t.bigint "estimate_id"
-    t.bigint "customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_customer_estimates_on_customer_id"
-    t.index ["estimate_id"], name: "index_customer_estimates_on_estimate_id"
-  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -88,8 +79,6 @@ ActiveRecord::Schema.define(version: 2021_02_03_122121) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "customer_estimates", "customers"
-  add_foreign_key "customer_estimates", "estimates"
   add_foreign_key "estimate_products", "estimates"
   add_foreign_key "estimate_products", "products"
   add_foreign_key "reasons", "estimates"
