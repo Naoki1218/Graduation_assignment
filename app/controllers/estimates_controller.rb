@@ -18,6 +18,14 @@ class EstimatesController < ApplicationController
 
   def create
     @estimate = current_user.estimates.build(estimate_params)
+    # @estimate.total_price = 0
+    # i = 0
+    # while i < 5 do
+    #   @estimate.total_price += Product.find(params[:estimate][:estimate_products_attributes][i.to_s][:product_id].to_i).unit_price.to_i * params[:estimate][:estimate_products_attributes][i.to_s][:quantity].to_i
+    #   i += 1
+    # end
+    #
+    # @estimate.total_price -= @estimate.discount
 
     if @estimate.save
       # 一覧画面へ遷移して"見積書を作成しました！"とメッセージを表示します。
@@ -63,6 +71,10 @@ class EstimatesController < ApplicationController
                                      :deadline,{ product_ids: [] }, :product_name, :quantity,
                                      [estimate_products_attributes:[:id, :estimate_id, :product_id, :quantity, :_destroy]]
                                      ).merge(user_id: current_user.id)
+  end
+
+  def total(unit_price, quantity)
+    unit_price.find * @estimate_product.quantity
   end
 
   def set_estimate
