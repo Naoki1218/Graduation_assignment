@@ -47,13 +47,16 @@ RSpec.describe '見積書作成機能', type: :system do
       it '作成した見積書が表示される' do
         visit new_estimate_path
         sleep 1
-        select '株式会社CCC',from: '顧客'
+
+        select '株式会社CCC',from: 'estimate_customer_id'
         select '2022',from: 'estimate_deadline_1i'
         select '1',from: 'estimate_deadline_2i'
         select '11',from: 'estimate_deadline_3i'
-        select 'ゴールド',from: '製品名'
+        fill_in '値引額', with: '0'
+        select 'ゴールド',from: 'estimate_estimate_products_attributes_0_product_id'
         fill_in 'estimate_estimate_products_attributes_0_quantity', with: '2'
         click_button '登録する'
+
         expect(page).to have_content '株式会社CCC'
 
       end
@@ -68,12 +71,12 @@ RSpec.describe '見積書作成機能', type: :system do
       it '金額が値引きされた見積書が作成される' do
         visit new_estimate_path
 
-        select '株式会社CCC',from: '顧客'
+        select '株式会社CCC',from: 'estimate_customer_id'
         select '2023',from: 'estimate_deadline_1i'
         select '2',from: 'estimate_deadline_2i'
         select '22',from: 'estimate_deadline_3i'
         fill_in '値引額',with: '100'
-        select 'ドライポンプ',from: '製品名'
+        select 'ドライポンプ',from: 'estimate_estimate_products_attributes_0_product_id'
         fill_in 'estimate_estimate_products_attributes_0_quantity', with: '1'
         click_button '登録する'
         expect(page).to have_content '株式会社CCC'
@@ -100,7 +103,7 @@ RSpec.describe '見積書作成機能', type: :system do
        it '該当見積書の内容を編集できる' do
           click_link '見積書編集', match: :first
           page.driver.browser.switch_to.alert.accept
-          select '株式会社CCC',from: '顧客'
+          select '株式会社CCC',from: 'estimate_customer_id'
           select '2022',from: 'estimate_deadline_1i'
           select '2',from: 'estimate_deadline_2i'
           select '22',from: 'estimate_deadline_3i'

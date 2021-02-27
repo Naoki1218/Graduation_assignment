@@ -57,7 +57,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
 
       it '管理者はユーザーを新規登録できる' do
         sleep 1
-        page.all(".pjax")[8].click
+        page.all(".pjax")[3].click
         click_link '新規作成'
 
         fill_in 'Eメール', with: 'test8@test8.com'
@@ -71,15 +71,16 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
 
       it '管理者はユーザー詳細画面にアクセスできる' do
         sleep 1
-        page.all(".pjax")[8].click
+        page.all(".pjax")[3].click
         page.all(".icon-info-sign")[1].click
+
         expect(page).to have_content "ユーザー 'test1'の詳細"
       end
       #
       it '管理者はユーザーの編集画面からユーザー情報を編集できる' do
         sleep 1
         visit rails_admin_path
-        page.all(".pjax")[8].click
+        page.all(".pjax")[3].click
         page.all(".icon-info-sign")[1].click
         page.all(".icon-pencil")[0].click
         fill_in 'Eメール', with: 'test2@test2.com'
@@ -96,7 +97,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it '管理者はユーザの削除をできること' do
         sleep 1
         visit rails_admin_path
-        page.all(".pjax")[8].click
+        page.all(".pjax")[3].click
         page.all(".icon-remove")[2].click
         page.all(".btn.btn-danger")[0].click
 
@@ -106,15 +107,15 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
       it '管理者は製品を新規登録できる' do
         sleep 1
         visit rails_admin_path
-        page.all(".pjax")[6].click
+        page.all(".pjax")[4].click
         click_link '新規作成'
 
-        fill_in 'Name', with: 'シリコン'
-        fill_in 'Stock', with: '100'
-        fill_in 'Unit price', with: '500'
+        fill_in '製品名', with: 'シリコン'
+        fill_in '在庫数', with: '100'
+        fill_in '単価', with: '500'
         click_on '保存'
 
-        expect(page).to have_content 'Productの作成に成功しました'
+        expect(page).to have_content '取扱製品の作成に成功しました'
         expect(page).to have_content 'シリコン'
       end
       it 'ログアウトできること' do

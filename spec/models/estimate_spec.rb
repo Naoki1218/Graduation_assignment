@@ -21,7 +21,7 @@ RSpec.describe Estimate, type: :model do
         end
       end
 
-      context '見積書の納期が空の場合' do
+      context '見積書の納期が当日以降でない場合' do
         it 'バリデーションにひっかかる' do
           # ここに内容を記載する
           estimate = Estimate.new(customer_id: '株式会社AAA', deadline: '', product_name: 'ゴールド')
@@ -40,7 +40,6 @@ RSpec.describe Estimate, type: :model do
       context '見積書の顧客名と納期と製品名に内容が記載されている場合' do
         it 'バリデーションが通る' do
 
-          # user = @user
           estimate = Estimate.new(customer_id: 1, deadline: '2022-01-11', product_name: 'ゴールド', user_id: 4)
           expect(estimate).to be_valid
         end
