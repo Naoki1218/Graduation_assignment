@@ -4,7 +4,7 @@ ja:
       estimate: 見積書
       user: ユーザー
       customer: 顧客
-      estimate_product: 出荷予定製品
+      estimate_products: 出荷予定製品
       reason: 理由
       product: 取扱製品
     attributes:
@@ -22,7 +22,7 @@ ja:
         name: 顧客
         user_id: 担当者
         estimates: 作成中見積書
-      estimate_product:
+      estimate_products:
         estimate: 見積書
         product: 製品名
         quantity: 数量
