@@ -2,13 +2,13 @@ class EstimateProduct < ApplicationRecord
   belongs_to :estimate
   belongs_to :product
 
+  def sum_price
+    self.product.unit_price * self.quantity
+  end
 
-def change
-  create_table :estimate_products do |t|
-　  t.references :estimate, foreign_key: true, null: false
-　  t.references :product, foreign_key: true, null: false
-　  t.integer :quantity, null: false
-　  t.timestamps
-    end
+  def self.sum_prices(estimate_products = [])
+    estimate_products
+      .map(&:sum_price)
+      .inject(:+)
   end
 end
