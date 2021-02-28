@@ -134,19 +134,6 @@ estimate2 = Estimate.create!(
     }
   ]
 )
-# Estimate.create!(
-#   [
-#     {
-#       customer_id: customers[2].id,
-#       discount: '0',
-#       deadline: '2022-01-11',
-#       user_id: 4,
-#       estimate_products_attributes: [
-#         {quantity: '2', product_id: products[2].id},
-#       ]
-#     }
-#   ]
-# )
 Estimate.create!(
   [
     {
@@ -168,8 +155,8 @@ Estimate.create!(
       deadline: '2023-01-11',
       user_id: 3,
       estimate_products_attributes: [
-        {quantity: '2',  product_id: products[3].id},
-        {quantity: '1',  product_id: products[2].id},
+        {quantity: '2', product_id: products[3].id},
+        {quantity: '1', product_id: products[2].id},
       ]
     }
   ]
@@ -182,9 +169,9 @@ estimate1 = Estimate.create!(
       deadline: '2023-01-11',
       user_id: 2,
       estimate_products_attributes: [
-        {quantity: '3',  product_id: products[1].id},
-        {quantity: '1',  product_id: products[2].id},
-        {quantity: '1',  product_id: products[3].id},
+        {quantity: '3', product_id: products[1].id},
+        {quantity: '1', product_id: products[2].id},
+        {quantity: '1', product_id: products[3].id},
       ]
     }
   ]
@@ -197,9 +184,36 @@ Estimate.create!(
       deadline: '2023-01-11',
       user_id: 2,
       estimate_products_attributes: [
-        {quantity: '1',  product_id: products[3].id},
-        {quantity: '1',  product_id: products[4].id},
-        {quantity: '1',  product_id: products[5].id},
+        {quantity: '1', product_id: products[3].id},
+        {quantity: '1', product_id: products[4].id},
+        {quantity: '1', product_id: products[5].id},
+      ]
+    }
+  ]
+)
+Estimate.create!(
+  [
+    {
+      customer_id: customers[7].id,
+      discount: '0',
+      deadline: '2023-11-11',
+      user_id: 4,
+      estimate_products_attributes: [
+        {quantity: '10', product_id: products[3].id},
+      ]
+    }
+  ]
+)
+Estimate.create!(
+  [
+    {
+      customer_id: customers[7].id,
+      discount: '0',
+      deadline: '2024-12-11',
+      user_id: 4,
+      estimate_products_attributes: [
+        {quantity: '5', product_id: products[1].id},
+        {quantity: '2', product_id: products[7].id},
       ]
     }
   ]
@@ -210,13 +224,53 @@ estimate3 = Estimate.create!(
       customer_id: customers[6].id,
       discount: '5000',
       deadline: '2023-01-11',
-      user_id: 4,
+      user_id: 3,
       estimate_products_attributes: [
-        {quantity: '1',  product_id: products[7].id},
+        {quantity: '1', product_id: products[7].id},
       ]
     }
   ]
 )
+estimate4 = Estimate.create!(
+  [
+    {
+      customer_id: customers[2].id,
+      discount: '5000',
+      deadline: '2021-12-11',
+      user_id: 2,
+      estimate_products_attributes: [
+        {quantity: '100', product_id: products[1].id},
+      ]
+    }
+  ]
+)
+estimate5 = Estimate.create!(
+  [
+    {
+      customer_id: customers[3].id,
+      discount: '100',
+      deadline: '2021-12-01',
+      user_id: 4,
+      estimate_products_attributes: [
+        {quantity: '10', product_id: products[3].id},
+      ]
+    }
+  ]
+)
+estimate6 = Estimate.create!(
+  [
+    {
+      customer_id: customers[4].id,
+      discount: '1000',
+      deadline: '2021-12-01',
+      user_id: 4,
+      estimate_products_attributes: [
+        {quantity: '10', product_id: products[5].id},
+      ]
+    }
+  ]
+)
+
 
 
 reason = Reason.create!(
@@ -235,4 +289,19 @@ reason = Reason.create!(
   user_id: user4.id,
   estimate_id: estimate3.first.id,
   content: 'リピートのため値引き。'
+)
+reason = Reason.create!(
+  user_id: user2.id,
+  estimate_id: estimate4.first.id,
+  content: '大量発注のため！！！'
+)
+reason = Reason.create!(
+  user_id: user4.id,
+  estimate_id: estimate5.first.id,
+  content: 'リプレイス購入のため！！！'
+)
+reason = Reason.create!(
+  user_id: user4.id,
+  estimate_id: estimate6.first.id,
+  content: '在庫処分のため特別特価！！！'
 )
