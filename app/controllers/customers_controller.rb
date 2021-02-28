@@ -7,5 +7,5 @@ class CustomersController < ApplicationController
   private
   def customer_params
       params.require(:customer).permit(:user_id, :name)
-    end
+  end
 end

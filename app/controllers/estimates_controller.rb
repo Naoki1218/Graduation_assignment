@@ -11,20 +11,15 @@ class EstimatesController < ApplicationController
   def new
     @estimate = Estimate.new
     @products = Product.all
-
     @estimate.estimate_products.build
-
   end
 
   def create
     @estimate = current_user.estimates.build(estimate_params)
     if @estimate.save
-      # 一覧画面へ遷移して"見積書を作成しました！"とメッセージを表示します。
       redirect_to estimates_path, notice: "見積書を作成しました！"
     else
-      # 入力フォームを再描画します。
       render :new
-      # end
     end
   end
 
