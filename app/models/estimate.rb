@@ -1,5 +1,4 @@
 class Estimate < ApplicationRecord
-  # validates :product_ids, presence: true
   validates :deadline, presence: true
   validates :discount, length: { maximum: 6 }
 
