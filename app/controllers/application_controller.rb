@@ -12,17 +12,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
-  # helper_method :current_estimate
-  #
-  # def current_estimate
-  #   if session[:estimate_id]
-  #     @estimate = Estimate.find(session[:estimate_id])
-  #   else
-  #     @estimate = Estimate.create
-  #     session[:estimate_id] = @estimate.id
-  #   end
-  # end
-
   protected
 
   def configure_permitted_parameters

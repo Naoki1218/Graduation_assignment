@@ -43,7 +43,7 @@ class ReasonsController < ApplicationController
   end
 
  private
- # ストロングパラメーター
+ 
  def reason_params
    params.require(:reason).permit(:estimate_id, :content, :user_id)
  end

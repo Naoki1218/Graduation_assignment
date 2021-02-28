@@ -31,22 +31,9 @@ class EstimatesController < ApplicationController
   def show
     @estimate = current_user.estimates.find(params[:id])
     @products = @estimate.products
-    # @products = Product.all
     @reasons = @estimate.reasons
     @reason = @estimate.reasons.build
   end
-
-  # def sample
-  #   # 取得できるものは以下と同じ @user = User.find(params[:id])
-  #   @estimate.total_price = 0
-  #   @estimate.total_price = @estimate.find(params[:estimate][:estimate_products_attributes][:product_id].to_i).unit_price.to_i * params[:estimate][:estimate_products_attributes][:quantity].to_i
-  #
-  #   if @estimate.total_price > @estimate.discount
-  #     redirect_to estimates_path
-  #   else
-  #     redirect_to estimates_new_path, notice: "値引額を確認してください！"
-  #   end
-  # end
 
   def edit
     @estimate = current_user.estimates.find(params[:id])
