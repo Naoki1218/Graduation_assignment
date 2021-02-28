@@ -129,7 +129,7 @@ estimate2 = Estimate.create!(
       deadline: '2022-01-11',
       user_id: 3,
       estimate_products_attributes: [
-        {quantity: '2', product_id: products[1].id}
+        {quantity: '2', product_id: products[7].id}
       ]
     }
   ]
@@ -208,7 +208,7 @@ estimate3 = Estimate.create!(
   [
     {
       customer_id: customers[6].id,
-      discount: '50000',
+      discount: '5000',
       deadline: '2023-01-11',
       user_id: 4,
       estimate_products_attributes: [
